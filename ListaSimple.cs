@@ -9,13 +9,13 @@ namespace ListasPractica
 {
     public class ListaSimple
     {
-        Nodo primero;
-        Nodo ultimo;
+        private Nodo primero;
+        private Nodo ultimo;
 
         public ListaSimple()
         {
 
-            primero = ultimo= null;
+            primero = ultimo = null;
         }
 
         public void InsetarPrincipio(Animal animal)
@@ -23,29 +23,90 @@ namespace ListasPractica
             if (ListaVacia())
             {
                 primero = ultimo = new Nodo(animal);
+                Console.WriteLine("Elemento agregado con exito");
             }
             else
             {
-                primero= new Nodo(animal, primero);
+                primero = new Nodo(animal, primero);
+                Console.WriteLine("Elemento agregado con exito");
+
             }
         }
         public void InsertarFinal(Animal animal)
         {
-            if (!ListaVacia())
+            if (ListaVacia())
             {
-                primero = ultimo = new Nodo(animal);
+                primero=ultimo=new Nodo(animal);
+                Console.WriteLine("Elemento agregado con exito");
+
 
             }
             else
             {
-                ultimo=ultimo.siguiente =new Nodo(animal);
+               ultimo=ultimo.siguiente =new Nodo(animal);
+                //Nodo anterior = null;
+                //Nodo actual = primero;
+                //while (actual != null)
+                //{
+                //    actual.siguiente = new Nodo(animal);
+                //    new Nodo(animal).siguiente = actual;
+                //    anterior = actual;
+
+                //    actual=actual.siguiente;
+                //}
+              
             }
+        }
+        public void InsertarMedio(Animal animal)
+        {
+            //  int longitud = LongitusLista();
+            //  int medio = 0;
+
+            //  medio = longitud/2;
+            //  Nodo actual = primero;
+            //  Nodo anterior = null;
+            //  while ( actual!=null) 
+            //  {
+            //      if (actual.animal.id==medio) 
+            //      {
+            //          actual = actual.siguiente;
+            //      }
+
+
+            //  }
+            //  anterior = actual;
+            //  Nodo nuevoAnimal = new Nodo(animal, actual.siguiente);
+            //  anterior.siguiente = nuevoAnimal;
+            //}
+            int longitud = LongitusLista();
+            int medio = 0;
+            medio = longitud / 2;
+            int contador = 0;
+            Nodo actual = primero;
+            Nodo anterior = null;
+            while (actual != null)
+            {
+                if (contador == medio)
+                {
+                    actual.siguiente = new Nodo(animal);
+                    new Nodo(animal).siguiente = actual;
+
+                }
+                anterior = actual;
+                actual = actual.siguiente;
+                contador++;
+
+            }
+
         }
         public bool ListaVacia()
         {
             if (primero != null)
+            {
                 return false;
-            else return true;
+            }
+            else { return true; }
+
         }
         public int LongitusLista()
         {
@@ -55,15 +116,14 @@ namespace ListasPractica
                 Console.WriteLine("Lista vacia");
                 return 0;
             }
-            if (primero !=null && primero.siguiente == null)
-            {  return 1;}
-            else 
+            if (primero != null && primero.siguiente == null)
+            { return 1; }
+            else
             {
                 Nodo actual = primero;
                 while (actual != null)
                 {
-                    Console.WriteLine(actual.animal.id);
-                    Console.WriteLine(actual.animal.raza);
+
 
                     actual = actual.siguiente;
                     contador++;
@@ -71,7 +131,7 @@ namespace ListasPractica
                 }
                 return contador + 1;
             }
-    
+
         }
         public void imprimir()
         {
@@ -79,11 +139,11 @@ namespace ListasPractica
             {
                 Console.WriteLine("La lista ta vacia jovensito");
             }
-           else
+            else
             {
                 Nodo actual = primero;
 
-                while (actual!=null)
+                while (actual != null)
                 {
                     Console.WriteLine(actual.animal.id);
                     Console.WriteLine(actual.animal.raza);
@@ -92,18 +152,18 @@ namespace ListasPractica
                 }
             }
         }
-        
+
         public void Buscar(int palabra)
         {
-            bool centinela= false;
+            bool centinela = false;
             if (ListaVacia())
             { Console.WriteLine("La lista ta vacia"); }
             else
             {
                 Nodo actual = primero;
-                while (actual!=null)
+                while (actual != null)
                 {
-                    if (palabra ==actual.animal.id )
+                    if (palabra == actual.animal.id)
                     {
                         Console.WriteLine("El elemento si existe en la lista");
                         centinela = true;
@@ -120,5 +180,6 @@ namespace ListasPractica
             }
 
         }
+     
     }
 }
